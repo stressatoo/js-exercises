@@ -1,30 +1,61 @@
+let computerScore = 0;
+let playerScore = 0;
+
 let choices = ["Rock", "Paper", "Scissors"];
 
 function getComputerChoice() {
       return choices[Math.floor(Math.random()*choices.length)];
 }
 
-function playRound(playerSelection, computerSelection) {
-      let playerSelection = (prompt("Insert choice (Rock / Paper / Scissors)")).toLowerCase();
-
+function playRound(ps, cs) {
       let result;
 
-      return result;
+      if (ps == cs) {
+            result = "You tied!";
+            ++playerScore;
+            ++computerScore;
+      } else if (ps == "rock") {
+            if (cs == "scissors") {
+                  result = "You won!";
+                  ++playerScore;
+            } else {
+                  result = "You lost!";
+                  ++computerScore;            
+            }
+      } else if (ps == "paper") {
+            if (cs == "rock") {
+                  result = "You won!";
+                  ++playerScore;
+            } else {
+                  result = "You lost!";
+                  ++computerScore;            
+            }
+      } else if (ps == "scissors") {
+            if (cs == "paper") {
+                  result = "You won!";
+                  ++playerScore;
+            } else {
+                  result = "You lost!";
+                  ++computerScore;            
+            }
+      } else console.log("Invalid selection");
+
+      console.log(result);
+      console.log("Player score: " + playerScore);
+      console.log("Computer score: " + computerScore);
 }
 
 function game() {
       for (let i = 1; i <= 5; ++i) {
-            playRound();
+            let playerSelection = (prompt("Insert choice (Rock / Paper / Scissors)")).toLowerCase();
+            playRound(playerSelection, computerSelection);
       }
 }
 
 getComputerChoice();
 
-let computerSelection = getComputerChoice();
+let computerSelection = getComputerChoice().toLowerCase();
 
+console.log(computerSelection);
 
-/*
-Write a function that plays a single round of Rock Paper Scissors. 
-The function should take two parameters - the playerSelection and computerSelection - 
-and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
-*/
+game();
